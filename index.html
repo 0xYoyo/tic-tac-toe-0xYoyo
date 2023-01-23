@@ -10,19 +10,47 @@
   </head>
   <body>
     <div class="container">
-      <h1><em>Tic Tac Toe</em></h1>
+      <div class="top">
+        <h1><em>Tic Tac Toe</em></h1>
+        <button>New round</button>
+        <button>New game</button>
+      </div>
 
-      <ul class="brackets">
-        <li data-="0"></li>
-        <li data-="1"></li>
-        <li data-="2"></li>
-        <li data-="3"></li>
-        <li data-="4"></li>
-        <li data-="5"></li>
-        <li data-="6"></li>
-        <li data-="7"></li>
-        <li data-="8"></li>
-      </ul>
+      <div class="bottom">
+        <div class="left">
+          <div>
+            <h3>Name:</h3>
+            <div id="nameL">Player 1</div>
+          </div>
+          <div>
+            <h3>Score:</h3>
+            <div id="scoreL">0</div>
+          </div>
+        </div>
+
+        <ul class="brackets">
+          <li data-="0"></li>
+          <li data-="1"></li>
+          <li data-="2"></li>
+          <li data-="3"></li>
+          <li data-="4"></li>
+          <li data-="5"></li>
+          <li data-="6"></li>
+          <li data-="7"></li>
+          <li data-="8"></li>
+        </ul>
+
+        <div class="right">
+          <div>
+            <h3>Name:</h3>
+            <div id="nameR">Player 2</div>
+          </div>
+          <div>
+            <h3>Score:</h3>
+            <div id="scoreR">0</div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
