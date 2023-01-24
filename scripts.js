@@ -42,6 +42,7 @@ const gameFlow = (() => {
     ) {
       currentPlayer.name += " has won this round!";
       currentPlayer.score++;
+      displayController.freeze();
     } else if (!board.includes("")) {
       player1.name += ` has tied with Player 2!`;
       player2.name += ` has tied with Player 1!`;
@@ -61,11 +62,31 @@ const gameFlow = (() => {
       }
     }
   };
-  return { currentMarker, confirmMarking, player1, player2 };
+
+  const newRound = () => {
+    player1.name = "Player 1";
+    player2.name = "Player 2";
+    gameBoard.myBoard.forEach((element, index) => {
+      gameBoard.myBoard[index] = "";
+    });
+  };
+
+  const newGame = () => {
+    player1.name = "Player 1";
+    player2.name = "Player 2";
+    player1.score = 0;
+    player2.score = 0;
+    gameBoard.myBoard.forEach((element, index) => {
+      gameBoard.myBoard[index] = "";
+    });
+  };
+  return { currentMarker, confirmMarking, player1, player2, newRound, newGame };
 })();
 
 const displayController = (() => {
   const cells = document.querySelectorAll("li");
+  const roundBtn = document.querySelector("#round");
+  const gameBtn = document.querySelector("#game");
   const scoreL = document.querySelector("#scoreL");
   const scoreR = document.querySelector("#scoreR");
   const nameL = document.querySelector("#nameL");
@@ -80,6 +101,19 @@ const displayController = (() => {
       nameR.textContent = gameFlow.player2.name;
     });
   };
+  const freeze = () => {
+    cells.forEach((li) => {
+      li.classList.add("freeze");
+    });
+  };
+  const unfreeze = () => {
+    cells.forEach((li) => {
+      if (li.classList.contains("freeze")) {
+        li.classList.remove("freeze");
+      }
+    });
+  };
+  // event listeners
   cells.forEach((li) => {
     li.addEventListener("click", function () {
       const placement = li.getAttribute("data-");
@@ -87,4 +121,15 @@ const displayController = (() => {
       renderBoard();
     });
   });
+  roundBtn.addEventListener("click", function () {
+    gameFlow.newRound();
+    renderBoard();
+    unfreeze();
+  });
+  gameBtn.addEventListener("click", function () {
+    gameFlow.newGame();
+    renderBoard();
+    unfreeze();
+  });
+  return { freeze };
 })();
